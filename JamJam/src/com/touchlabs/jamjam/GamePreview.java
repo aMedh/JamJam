@@ -71,13 +71,18 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.icon, BitmapFactory.decodeResource(getResources(), R.drawable.icon));
 		mBitMapCache.put(R.drawable.back, BitmapFactory.decodeResource(getResources(), R.drawable.back));
 		mBitMapCache.put(R.drawable.background, BitmapFactory.decodeResource(getResources(), R.drawable.background));
+		mBitMapCache.put(R.drawable.gamebg, BitmapFactory.decodeResource(getResources(), R.drawable.gamebg));
+		mBitMapCache.put(R.drawable.dront, BitmapFactory.decodeResource(getResources(), R.drawable.dront));
 
 	}
 	
 
 	public void onDraw(Canvas canvas) {
 		// Draw background		
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.background),0,0,null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.gamebg),0,0,null);
+		
+		// Draw the dront
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),100,100,null);
 	
 
 	}

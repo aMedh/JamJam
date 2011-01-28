@@ -30,7 +30,7 @@ public class GameModel implements java.io.Serializable {
 	 */
 	public  void updateModel(float timeDelta) {
 
-
+			//GEhsssss
 	}
 
 
