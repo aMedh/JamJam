@@ -70,6 +70,8 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.background, BitmapFactory.decodeResource(getResources(), R.drawable.background));
 		mBitMapCache.put(R.drawable.gamebg, BitmapFactory.decodeResource(getResources(), R.drawable.gamebg));
 		mBitMapCache.put(R.drawable.dront, BitmapFactory.decodeResource(getResources(), R.drawable.dront));
+		mBitMapCache.put(R.drawable.ground, BitmapFactory.decodeResource(getResources(), R.drawable.ground));
+		mBitMapCache.put(R.drawable.wall, BitmapFactory.decodeResource(getResources(), R.drawable.wall));
 
 	}
 	
@@ -78,9 +80,25 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		// Draw background		
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.gamebg),0,0,null);
 		
-		// Draw the dront
+		
+		// Draw top ground
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundTop().getX1(), mGameModel.getGroundTop().getY(),null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundTop().getX2(), mGameModel.getGroundTop().getY(),null);
+		
+		// Draw middle ground
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundMid().getX1(), mGameModel.getGroundMid().getY(),null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundMid().getX2(), mGameModel.getGroundMid().getY(),null);
+		
+		//Draw bottom ground
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundBot().getX1(), mGameModel.getGroundBot().getY(),null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundBot().getX2(), mGameModel.getGroundBot().getY(),null);
+
+		//Draw wall in the middle
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.wall), mGameModel.getEnemyWall().getX1(), mGameModel.getEnemyWall().getY(),null);
+
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
 	
+
 
 	}
 	
