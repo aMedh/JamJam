@@ -23,16 +23,12 @@ import android.widget.Toast;
 public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, java.io.Serializable{
 	
 	public static final long serialVersionUID = 1L;
-	
-
-	
 	private static final Paint sPaintTextWhite = new Paint();
 	private static final Paint sPaintTextBlack = new Paint();
-	
 	private GamePreviewThread thread;
 	private Map<Integer, Bitmap> mBitMapCache = new HashMap<Integer, Bitmap>();
 	private Activity mActivity;
-
+	private GameModel mGameModel;
 
 	public Context context;
 
@@ -40,11 +36,12 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	public GamePreview(Context context) {
 		super(context);			
 		
+		mGameModel = new GameModel();
 		
 		fillBitmapCache();	
 		mActivity = (Activity) context;		
 		getHolder().addCallback(this);
-		thread = new GamePreviewThread(this);
+		thread = new GamePreviewThread(this,mGameModel);
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 		requestFocus();
@@ -122,7 +119,7 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	public void surfaceCreated(SurfaceHolder holder) {
 		
 		if (!thread.isAlive()) {
-			thread = new GamePreviewThread(this);			
+			thread = new GamePreviewThread(this,mGameModel);			
 		}
 		
 		thread.setRunning(true);
