@@ -11,6 +11,10 @@ public class GroundMid {
 		speed = 100;
 	}
 	
+	public void setSpeed(double newspeed){
+		speed = Double.valueOf(newspeed).intValue();// newspeed;
+	}
+	
 	public int getX1(){
 		return xPos;
 	}

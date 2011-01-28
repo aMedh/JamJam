@@ -19,6 +19,10 @@ public class GameModel implements java.io.Serializable {
 	private Dront mDront;
 	private PowerUp mPowerUp;	
 	private List<EnemyWall> listEnemyWall = new ArrayList<EnemyWall>();
+	
+	private boolean lost = false;
+	private float incSpeedTimer = 5; //each 10 sec increase the globalGameSpeed
+	private double globalGameSpeed = 100;
 
 	
 	/**
@@ -55,39 +59,64 @@ public class GameModel implements java.io.Serializable {
 	 */
 	public  void updateModel(float timeDelta) {
 
-
-		groundTop.setXPos(timeDelta);
-		groundMid.setXPos(timeDelta);
-		groundBot.setXPos(timeDelta);
 		
-		mDront.updateDront(timeDelta);
-		mPowerUp.updatePowerUp(timeDelta);
 		
-		if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
-			if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
-				mDront.drontPowerUp();
-				mPowerUp.updatePowerUp(600);
-			}
-		}
-				
-		int count = listEnemyWall.size();
-		for(int i = 0; i < count; i++){
-			listEnemyWall.get(i).setXPos(timeDelta);
-		}
-		
-		for(int i = 0; i < count; i++){
-			if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
-				if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
-					mDront.hitDront();
-					listEnemyWall.get(i).setX(600);
-					listEnemyWall.get(i).setNewRandomTime();	
+		if(!lost){
+			groundTop.setXPos(timeDelta);
+			groundMid.setXPos(timeDelta);
+			groundBot.setXPos(timeDelta);
+			mDront.updateDront(timeDelta);
+			mPowerUp.updatePowerUp(timeDelta);
+			
+			if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
+				if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
+					mDront.drontPowerUp();
+					mPowerUp.updatePowerUp(600);
 				}
+			}
+					
+			int count = listEnemyWall.size();
+			for(int i = 0; i < count; i++){
+				listEnemyWall.get(i).setXPos(timeDelta);
+			}
+			
+			incSpeedTimer -= timeDelta;
+			if(incSpeedTimer < 0){
+				globalGameSpeed *= 1.1;
+				//Update speed for all 
+				//Update speed for walls
+				for(int i = 0; i < count; i++){
+					listEnemyWall.get(i).setSpeed(globalGameSpeed);
+				}
+				groundTop.setSpeed(globalGameSpeed);
+				groundMid.setSpeed(globalGameSpeed);
+				groundBot.setSpeed(globalGameSpeed);
+				
+				incSpeedTimer = 5;
+			}
+			
+			for(int i = 0; i < count; i++){
+				if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
+					if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
+						mDront.hitDront();
+						listEnemyWall.get(i).setX(600);
+						listEnemyWall.get(i).setNewRandomTime();	
+					}
+				}
+			}
+			
+			//Lost?
+			if(mDront.getX() == 0){
+				lost = true;
 			}
 		}
 
 
 	}
 	
+	public boolean getLost(){
+		return lost;
+	}
 	//Return the dront
 	public Dront getDront() {
 		return mDront;
