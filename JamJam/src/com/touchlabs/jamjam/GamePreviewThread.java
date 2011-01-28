@@ -7,27 +7,22 @@ import android.os.SystemClock;
 /**
  * Thread class to perform the so called "game loop".
  * 
- * @author Fredrik Persson
- * @author Jonas Andersson
- * @author Ahmed Chaban
- * @author Jonas Wallander
- * @author Disa Faith
- * @author Daniel Arvidsson
  */
 class GamePreviewThread extends Thread {
 	private GamePreview mGamePreview;
 	private boolean mRunThread = false;
 	private long mLastTime;
+	GameModel mGameModel;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param panel View class on which we trigger the drawing.
 	 */
-	public GamePreviewThread(GamePreview panel) {
+	public GamePreviewThread(GamePreview panel, GameModel model) {
 		mGamePreview = panel;
 		mLastTime = SystemClock.uptimeMillis();
-			
+		mGameModel = model;
 	}
 
 	/**
@@ -70,7 +65,7 @@ class GamePreviewThread extends Thread {
 				mLastTime = time;
 
 				// Do everything that needs a time delta!
-		//		GameModel.updateModel(secondsDelta);
+				mGameModel.updateModel(secondsDelta);
 			}
 			
 			final long endTime = SystemClock.uptimeMillis();
