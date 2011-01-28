@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+android:id="@+id/widget32"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@drawable/background"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<TableLayout
+android:id="@+id/widget28"
+android:layout_width="295px"
+android:orientation="vertical"
+android:layout_centerVertical="true"
+android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_height="235px">
+<Button
+android:id="@+id/StartGame"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@layout/startgame_button">
+</Button>
+
+<Button
+android:id="@+id/Help"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@layout/help_button">
+</Button>
+
+
+<Button
+android:id="@+id/Credits"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@layout/credits_button"
+>
+</Button>
+
+<Button
+android:id="@+id/Exit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content" android:background="@layout/exit_button">
+</Button>
+
+</TableLayout>
+</RelativeLayout>
