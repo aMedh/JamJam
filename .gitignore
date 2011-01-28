@@ -1,0 +1,7 @@
+*~
+*.class
+*.dex
+*.apk
+*.ap_
+JamJam/bin/**/*
+Jam/gen/com/touchlabs/jamjam/R.java
