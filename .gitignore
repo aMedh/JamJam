@@ -3,5 +3,5 @@
 *.dex
 *.apk
 *.ap_
-JamJam/bin/**/*
-Jam/gen/com/touchlabs/jamjam/R.java
+trunk/bin/**/*
+trunk/gen/com/chalmers/game/td/R.java

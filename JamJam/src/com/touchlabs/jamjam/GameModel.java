@@ -7,13 +7,19 @@ import android.content.Context;
 public class GameModel implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	private GroundTop groundTop;
+	private GroundMid groundMid;
+	private GroundBot groundBot;
+	private EnemyWall enemyWall;
 	
 	/**
 	 * Constructor
 	 */
 	public GameModel() {
-		///hej
+		groundTop = new GroundTop();
+		groundMid = new GroundMid();
+		groundBot = new GroundBot();
+		enemyWall = new EnemyWall();
 	}
 	
 	/**
@@ -30,9 +36,29 @@ public class GameModel implements java.io.Serializable {
 	 */
 	public  void updateModel(float timeDelta) {
 
-			//GEhsssss
+		groundTop.setXPos(timeDelta);
+		groundMid.setXPos(timeDelta);
+		groundBot.setXPos(timeDelta);
+		
+		enemyWall.setXPos(timeDelta); //Wall in the middle
+		
 	}
 
+	public GroundTop getGroundTop(){
+		return groundTop;
+	}
+	
+	public GroundMid getGroundMid(){
+		return groundMid;
+	}
+	
+	public GroundBot getGroundBot(){
+		return groundBot;
+	}
+	
+	public EnemyWall getEnemyWall(){
+		return enemyWall;
+	}
 
 	public  void release() {
 
