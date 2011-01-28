@@ -1,5 +1,9 @@
 package com.touchlabs.jamjam;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import android.content.Context;
 
 
@@ -11,10 +15,10 @@ public class GameModel implements java.io.Serializable {
 	private GroundTop groundTop;
 	private GroundMid groundMid;
 	private GroundBot groundBot;
-	private EnemyWall enemyWall;
-
+	//private EnemyWall enemyWall;
 	private Dront mDront;
-	private PowerUp mPowerUp;
+	private PowerUp mPowerUp;	
+	private List<EnemyWall> listEnemyWall = new ArrayList<EnemyWall>();
 
 	
 	/**
@@ -22,14 +26,19 @@ public class GameModel implements java.io.Serializable {
 	 */
 	public GameModel() {
 
+		
 		groundTop = new GroundTop();
 		groundMid = new GroundMid();
 		groundBot = new GroundBot();
-		enemyWall = new EnemyWall();
 
 		mDront = new Dront();
 		mPowerUp = new PowerUp();
-
+		
+		Random generator = new Random();
+		for(int i = 0; i < 6; i++){
+			
+			listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), (generator.nextInt(3) + 1)));
+		}
 	}
 	
 	/**
@@ -51,25 +60,27 @@ public class GameModel implements java.io.Serializable {
 		groundMid.setXPos(timeDelta);
 		groundBot.setXPos(timeDelta);
 		
-		enemyWall.setXPos(timeDelta); //Wall in the middle
-		
-
 		mDront.updateDront(timeDelta);
 		mPowerUp.updatePowerUp(timeDelta);
-		
-		if(mDront.getX() + 80 > enemyWall.getX1() && mDront.getX() < enemyWall.getX1()){
-			if(mDront.getY() + 80 > enemyWall.getY() && mDront.getY() < enemyWall.getY() +80){
-				mDront.hitDront();
-				enemyWall.setXPos(600);				
-			}
-		}
 		
 		if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
 			if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
 				mDront.drontPowerUp();
 				mPowerUp.updatePowerUp(600);
+			}
+		}
 				
-				
+		int count = listEnemyWall.size();
+		for(int i = 0; i < count; i++){
+			listEnemyWall.get(i).setXPos(timeDelta);
+		}
+		
+		for(int i = 0; i < count; i++){
+			if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
+				if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
+					mDront.hitDront();
+					listEnemyWall.get(i).setNewRandomTime();	
+				}
 			}
 		}
 
@@ -98,8 +109,8 @@ public class GameModel implements java.io.Serializable {
 		return groundBot;
 	}
 	
-	public EnemyWall getEnemyWall(){
-		return enemyWall;
+	public List<EnemyWall> getListEnemyWall(){
+		return listEnemyWall;
 	}
 
 	public  void release() {

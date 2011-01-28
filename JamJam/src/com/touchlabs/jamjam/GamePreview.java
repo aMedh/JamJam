@@ -95,8 +95,10 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundBot().getX2(), mGameModel.getGroundBot().getY(),null);
 
 		//Draw wall in the middle
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.wall), mGameModel.getEnemyWall().getX1(), mGameModel.getEnemyWall().getY(),null);
-
+		int count = mGameModel.getListEnemyWall().size();
+		for(int i = 0; i < count; i++){
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.wall), mGameModel.getListEnemyWall().get(i).getX1(), mGameModel.getListEnemyWall().get(i).getY(),null);
+		}
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
 	
 		//PowerUp
