@@ -70,6 +70,7 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.background, BitmapFactory.decodeResource(getResources(), R.drawable.background));
 		mBitMapCache.put(R.drawable.gamebg, BitmapFactory.decodeResource(getResources(), R.drawable.gamebg));
 		mBitMapCache.put(R.drawable.dront, BitmapFactory.decodeResource(getResources(), R.drawable.dront));
+		mBitMapCache.put(R.drawable.egg, BitmapFactory.decodeResource(getResources(), R.drawable.egg));
 		mBitMapCache.put(R.drawable.ground, BitmapFactory.decodeResource(getResources(), R.drawable.ground));
 		mBitMapCache.put(R.drawable.wall, BitmapFactory.decodeResource(getResources(), R.drawable.wall));
 
@@ -98,7 +99,9 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
 	
-
+		//PowerUp
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.egg),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
+		
 
 	}
 	

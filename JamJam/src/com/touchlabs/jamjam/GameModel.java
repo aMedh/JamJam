@@ -14,6 +14,7 @@ public class GameModel implements java.io.Serializable {
 	private EnemyWall enemyWall;
 
 	private Dront mDront;
+	private PowerUp mPowerUp;
 
 	
 	/**
@@ -27,6 +28,7 @@ public class GameModel implements java.io.Serializable {
 		enemyWall = new EnemyWall();
 
 		mDront = new Dront();
+		mPowerUp = new PowerUp();
 
 	}
 	
@@ -53,21 +55,35 @@ public class GameModel implements java.io.Serializable {
 		
 
 		mDront.updateDront(timeDelta);
+		mPowerUp.updatePowerUp(timeDelta);
 		
 		if(mDront.getX() + 80 > enemyWall.getX1() && mDront.getX() < enemyWall.getX1()){
 			if(mDront.getY() + 80 > enemyWall.getY() && mDront.getY() < enemyWall.getY() +80){
 				mDront.hitDront();
-				enemyWall.setXPos(600);
+				enemyWall.setXPos(600);				
+			}
+		}
+		
+		if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
+			if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
+				mDront.drontPowerUp();
+				mPowerUp.updatePowerUp(600);
 				
 				
 			}
 		}
+
 
 	}
 	
 	//Return the dront
 	public Dront getDront() {
 		return mDront;
+	}
+
+	//Return the powerup
+	public PowerUp getPowerUp() {
+		return mPowerUp;
 	}
 
 	public GroundTop getGroundTop(){

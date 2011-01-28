@@ -1,7 +1,7 @@
 package com.touchlabs.jamjam;
 
 public class Dront {
-	private int xPos = 225;
+	private int xPos = 150;
 	private int yPos = 220;
 	private int gridX = 3;
 	private int gridY = 0;
@@ -31,10 +31,18 @@ public class Dront {
 		yPos = y;		
 	}
 	
+	//If the dront gets hit by obstacle
 	public void hitDront() 
 	{
 		if (gridX > 0) 
 			gridX--;
+	}
+	
+	//If the dront gets hit by obstacle
+	public void drontPowerUp() 
+	{
+		if (gridX < 3) 
+			gridX++;
 	}
 
 	public void moveDrontUP() 
@@ -82,25 +90,45 @@ public class Dront {
 			else yPos = 20;		
 		}
 		
-		//Dront gets hit?
+		//Dront gets hit or power up
 		if (gridX == 3) {
-			xPos = 225;			
+			if (xPos < 150) {
+				xPos += speedX * timeDelta; 
+				if (xPos < 150)
+					xPos = 150;
+			} else xPos = 150;			
 		}
 		if (gridX == 2) {
-			if (xPos > 150) {
+			if (xPos > 100) {
 				xPos -= speedX * timeDelta; 
+				if (xPos < 100)
+					xPos = 100; 				
 			}
-			else xPos = 150;			
+			else if (xPos < 100) {
+				xPos += speedX * timeDelta; 
+				if (xPos < 100)
+					xPos = 100;
+			} 			
+			else xPos = 100;			
 		}
 		if (gridX == 1) {
-			if (xPos > 75) {
+			if (xPos > 50) {
 				xPos -= speedX * timeDelta; 
+				if (xPos < 50)
+					xPos = 50; 				
 			}
-			else xPos = 75;			
+			else if (xPos < 50) {
+				xPos += speedX * timeDelta; 
+				if (xPos < 50)
+					xPos = 50;
+			} 			
+			else xPos = 50;			
 		}
 		if (gridX == 0) {
 			if (xPos > 0) {
 				xPos -= speedX * timeDelta; 
+				if (xPos < 0)
+					xPos = 0; 				
 			}
 			else xPos = 0;			
 		}
