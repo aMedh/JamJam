@@ -65,14 +65,13 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	
 	private void fillBitmapCache() {
 		mBitMapCache = new HashMap<Integer, Bitmap>();
-		mBitMapCache.put(R.drawable.icon, BitmapFactory.decodeResource(getResources(), R.drawable.icon));
-		mBitMapCache.put(R.drawable.back, BitmapFactory.decodeResource(getResources(), R.drawable.back));
 		mBitMapCache.put(R.drawable.background, BitmapFactory.decodeResource(getResources(), R.drawable.background));
 		mBitMapCache.put(R.drawable.gamebg, BitmapFactory.decodeResource(getResources(), R.drawable.gamebg));
 		mBitMapCache.put(R.drawable.dront, BitmapFactory.decodeResource(getResources(), R.drawable.dront));
 		mBitMapCache.put(R.drawable.egg, BitmapFactory.decodeResource(getResources(), R.drawable.egg));
 		mBitMapCache.put(R.drawable.ground, BitmapFactory.decodeResource(getResources(), R.drawable.ground));
 		mBitMapCache.put(R.drawable.wall, BitmapFactory.decodeResource(getResources(), R.drawable.wall));
+		mBitMapCache.put(R.drawable.gameover, BitmapFactory.decodeResource(getResources(), R.drawable.gameover));
 
 	}
 	
@@ -104,6 +103,10 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		//PowerUp
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.egg),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
 		
+		//Lost?
+		if(mGameModel.getLost()){
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100,60,null);
+		}
 
 	}
 	
@@ -114,13 +117,19 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 			
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if (event.getX() > 0 && event.getX() < 520) {
-					if (event.getY() > 0 && event.getY() < 160)
-						mGameModel.getDront().moveDrontDOWN();
-					if (event.getY() > 160)
-						mGameModel.getDront().moveDrontUP();
-					
-					
+				if(!mGameModel.getLost()){
+					if (event.getX() > 0 && event.getX() < 520) {
+						if (event.getY() > 0 && event.getY() < 160)
+							mGameModel.getDront().moveDrontDOWN();
+						if (event.getY() > 160)
+							mGameModel.getDront().moveDrontUP();
+					}
+				} else {
+					thread.setRunning(false);
+					mBitMapCache = null;
+					getHolder().removeCallback(this);
+					Activity parent = (Activity) getContext();
+					parent.finish();
 				}
 		
 				break;

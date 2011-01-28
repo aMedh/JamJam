@@ -24,6 +24,10 @@ public class EnemyWall {
 		startTime = randomTime;
 	}
 	
+	public void setSpeed(double newspeed){
+		speed = Double.valueOf(newspeed).intValue();// newspeed;
+	}
+	
 	public int getX1(){
 		return xPos;
 	}

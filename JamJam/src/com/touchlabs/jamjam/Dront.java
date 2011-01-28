@@ -30,6 +30,7 @@ public class Dront {
 	public void setY(int y) {
 		yPos = y;		
 	}
+
 	
 	//If the dront gets hit by obstacle
 	public void hitDront() 
