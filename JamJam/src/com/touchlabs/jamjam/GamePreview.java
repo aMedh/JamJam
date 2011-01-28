@@ -80,9 +80,6 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		// Draw background		
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.gamebg),0,0,null);
 		
-		// Draw the dront
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),100,100,null);
-		
 		
 		// Draw top ground
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundTop().getX1(), mGameModel.getGroundTop().getY(),null);
@@ -99,6 +96,10 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		//Draw wall in the middle
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.wall), mGameModel.getEnemyWall().getX1(), mGameModel.getEnemyWall().getY(),null);
 
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
+	
+
+
 	}
 	
 	@Override
@@ -108,7 +109,14 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 			
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-			
+				if (event.getX() > 0 && event.getX() < 520) {
+					if (event.getY() > 0 && event.getY() < 160)
+						mGameModel.getDront().moveDrontDOWN();
+					if (event.getY() > 160)
+						mGameModel.getDront().moveDrontUP();
+					
+					
+				}
 		
 				break;
 			case MotionEvent.ACTION_MOVE:
