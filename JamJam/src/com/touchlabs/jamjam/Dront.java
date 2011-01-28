@@ -41,7 +41,7 @@ public class Dront {
 	//If the dront gets hit by obstacle
 	public void drontPowerUp() 
 	{
-		if (gridX < 3) 
+		if (gridX < 4) 
 			gridX++;
 	}
 
@@ -91,14 +91,27 @@ public class Dront {
 		}
 		
 		//Dront gets hit or power up
-		if (gridX == 3) {
-			if (xPos < 150) {
+		if (gridX == 4) {
+			if (xPos < 200) {
 				xPos += speedX * timeDelta; 
-				if (xPos < 150)
-					xPos = 150;
-			} else xPos = 150;			
+				if (xPos > 200)
+					xPos = 200;
+			} else xPos = 200;			
 		}
-		if (gridX == 2) {
+		else if (gridX == 3) {
+			if (xPos > 150) {
+				xPos -= speedX * timeDelta; 
+				if (xPos < 150)
+					xPos = 150; 				
+			}
+			else if (xPos < 150) {
+				xPos += speedX * timeDelta; 
+				if (xPos > 150)
+					xPos = 150;
+			} 			
+			else xPos = 150;			
+		}
+		else if (gridX == 2) {
 			if (xPos > 100) {
 				xPos -= speedX * timeDelta; 
 				if (xPos < 100)
@@ -106,12 +119,12 @@ public class Dront {
 			}
 			else if (xPos < 100) {
 				xPos += speedX * timeDelta; 
-				if (xPos < 100)
+				if (xPos > 100)
 					xPos = 100;
 			} 			
 			else xPos = 100;			
 		}
-		if (gridX == 1) {
+		else if (gridX == 1) {
 			if (xPos > 50) {
 				xPos -= speedX * timeDelta; 
 				if (xPos < 50)
@@ -119,12 +132,12 @@ public class Dront {
 			}
 			else if (xPos < 50) {
 				xPos += speedX * timeDelta; 
-				if (xPos < 50)
+				if (xPos > 50)
 					xPos = 50;
 			} 			
 			else xPos = 50;			
 		}
-		if (gridX == 0) {
+		else if (gridX == 0) {
 			if (xPos > 0) {
 				xPos -= speedX * timeDelta; 
 				if (xPos < 0)
