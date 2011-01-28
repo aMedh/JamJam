@@ -7,13 +7,13 @@ import android.content.Context;
 public class GameModel implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	private Dront mDront;
 	
 	/**
 	 * Constructor
 	 */
 	public GameModel() {
-		///hej
+		mDront = new Dront();
 	}
 	
 	/**
@@ -29,8 +29,13 @@ public class GameModel implements java.io.Serializable {
 	 * @param timeDelta 
 	 */
 	public  void updateModel(float timeDelta) {
-
+			mDront.updateDront(timeDelta);
 			//GEhsssss
+	}
+	
+	//Return the dront
+	public Dront getDront() {
+		return mDront;
 	}
 
 
