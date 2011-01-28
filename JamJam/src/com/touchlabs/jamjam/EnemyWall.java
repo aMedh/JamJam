@@ -28,6 +28,10 @@ public class EnemyWall {
 		return xPos;
 	}
 	
+	public void setX(int pos){
+		xPos = pos;
+	}
+	
 	public int getY(){
 		return yPos - 80;
 	}

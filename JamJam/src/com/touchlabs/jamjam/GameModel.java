@@ -70,6 +70,7 @@ public class GameModel implements java.io.Serializable {
 			if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
 				if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
 					mDront.hitDront();
+					listEnemyWall.get(i).setX(600);
 					listEnemyWall.get(i).setNewRandomTime();	
 				}
 			}
