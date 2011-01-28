@@ -61,14 +61,14 @@ public class GameModel implements java.io.Serializable {
 		groundBot.setXPos(timeDelta);
 		
 		mDront.updateDront(timeDelta);
-		//mPowerUp.updatePowerUp(timeDelta);
+		mPowerUp.updatePowerUp(timeDelta);
 		
-		/*if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
+		if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
 			if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
 				mDront.drontPowerUp();
 				mPowerUp.updatePowerUp(600);
 			}
-		}*/
+		}
 				
 		int count = listEnemyWall.size();
 		for(int i = 0; i < count; i++){
