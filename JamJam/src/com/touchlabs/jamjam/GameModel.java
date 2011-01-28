@@ -13,7 +13,7 @@ public class GameModel implements java.io.Serializable {
 	 * Constructor
 	 */
 	public GameModel() {
-
+		///hej
 	}
 	
 	/**
