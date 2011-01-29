@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 
 
@@ -23,7 +24,10 @@ public class GameModel implements java.io.Serializable {
 	private boolean lost = false;
 	private float incSpeedTimer = 5; //each 10 sec increase the globalGameSpeed
 	private double globalGameSpeed = 100;
+	private int distance = 0;
+	private double distanceMeter = 1;
 
+	private Context context;
 	
 	/**
 	 * Constructor
@@ -49,7 +53,7 @@ public class GameModel implements java.io.Serializable {
 	 * Initializes all variables of the GameModel.
 	 */
 	public  void initialize(Context context) {
-	
+		this.context = context;
 	
 	}
 	
@@ -71,6 +75,7 @@ public class GameModel implements java.io.Serializable {
 			if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
 				if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
 					mDront.drontPowerUp();
+					distance += 1;
 					mPowerUp.updatePowerUp(600);
 				}
 			}
@@ -95,10 +100,19 @@ public class GameModel implements java.io.Serializable {
 				incSpeedTimer = 5;
 			}
 			
+			//Score in distance
+			distanceMeter += timeDelta * globalGameSpeed * 0.01;
+			if(distanceMeter > 2){
+				distance += 1;
+				distanceMeter = 1;
+			}
+			
+			
 			for(int i = 0; i < count; i++){
 				if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
 					if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
 						mDront.hitDront();
+						distance -= 1;
 						listEnemyWall.get(i).setX(600);
 						listEnemyWall.get(i).setNewRandomTime();	
 					}
@@ -112,6 +126,10 @@ public class GameModel implements java.io.Serializable {
 		}
 
 
+	}
+	
+	public int getDistance(){
+		return distance;
 	}
 	
 	public boolean getLost(){

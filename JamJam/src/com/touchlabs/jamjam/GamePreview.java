@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -35,8 +36,10 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	
 	public GamePreview(Context context) {
 		super(context);			
+		this.context = context;
 		
 		mGameModel = new GameModel();
+		mGameModel.initialize(context);
 		
 		fillBitmapCache();	
 		mActivity = (Activity) context;		
@@ -103,9 +106,25 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		//PowerUp
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.egg),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
 		
+		canvas.drawText("Distance: " + mGameModel.getDistance(), 156,20+2,sPaintTextBlack);
+		canvas.drawText("Distance: " + mGameModel.getDistance(), 155,20,sPaintTextWhite);
+
 		//Lost?
 		if(mGameModel.getLost()){
-			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100,60,null);
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100-30,60,null);
+			canvas.drawText("Your distance: " + mGameModel.getDistance(), 166-30,165+2,sPaintTextBlack);
+			
+		    // Restore preferences
+			SharedPreferences settings = mActivity.getSharedPreferences("Score_file", 0);
+			canvas.drawText("Highscore: " + settings.getInt("distance", 0), 166-30,185+2,sPaintTextBlack);
+			
+			if(mGameModel.getDistance() > settings.getInt("distance", 0)){
+			// Save you score
+				SharedPreferences settings2 = context.getSharedPreferences("Score_file", 0);
+				SharedPreferences.Editor editor = settings2.edit();
+				editor.putInt("distance", mGameModel.getDistance());
+				editor.commit();
+			}
 		}
 
 	}
