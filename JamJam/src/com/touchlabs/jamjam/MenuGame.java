@@ -23,17 +23,7 @@ import android.widget.Toast;
 public class MenuGame extends Activity {
     
 	public GamePreview gamePreview;
-	//	public GameModel gm;
-	private File mFile;
-	
-	// FOR SAVE
-	FileOutputStream f_out;
-	ObjectOutputStream obj_out;
-	//	GameModel gmsave;
-	FileInputStream f_in;
-	ObjectInputStream obj_in;
-	Object obj;
-	boolean save = false;
+
 	
     /**
      * Method called on application start.
@@ -47,83 +37,10 @@ public class MenuGame extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
-        
-        
-        if (savedInstanceState != null) {
-            Toast.makeText(this, "onCreate() : " + savedInstanceState.getString("TO_REMEMBER"), Toast.LENGTH_LONG).show();
-        }
-                gamePreview = new GamePreview(this); 
-        //        gamePreview.setState(2); // Set to STATE_CHOOSETRACK
-        
-
-     // Read from disk using FileInputStream.
-        try{
-		     // Use a FileOutputStream to send data to a file
-		     // called myobject.data.
-            f_in = new FileInputStream (Environment.getExternalStorageDirectory() + "/etdsavestatetest.ser");
-
-       	     // Read object using ObjectInputStream.
-       	     obj_in = new ObjectInputStream (f_in);
-       	   
-       		 // Read an object.
-       		 obj = obj_in.readObject ();
-
-	
-	        // Is the object that you read in, say, an instance
-	        // of the Vector class?
-       		Toast.makeText(this, "obj Instance Of GameModel?", Toast.LENGTH_LONG).show();
-       		/*
-	        if (obj instanceof GameModel)
-	        {
-		         // Cast object to a Vector
-		         gmsave = (GameModel) obj;
-		         //gamePreview.setResumeGame(true);// 
-		         save = true;
-		         gamePreview.setState(3); // Set to STATE_RESUMEGAME
-		         Toast.makeText(this, "Show pop up!", Toast.LENGTH_LONG).show();
-
-	        }
-            */
-            
-            //---------------------
-
-       } catch (FileNotFoundException ds){
-    	
-    	   Toast.makeText(this, "File Not Found", Toast.LENGTH_LONG).show();
-    	   
-       } catch (IOException ioex){
-    	   Toast.makeText(this, "IO Exception", Toast.LENGTH_LONG).show();
-       } catch (ClassNotFoundException ioedsxm){
-    	   Toast.makeText(this, "Class not found", Toast.LENGTH_LONG).show();
-       }
-       
-    
-        
-     if(save){
-    	 //   	 gmsave.initialize(this);
-
-    	 //   	 gamePreview.setSavedGameModel(gmsave);
-     }
-        
-       
-        
-          setContentView(gamePreview);        
+         gamePreview = new GamePreview(this); 
+         setContentView(gamePreview);        
     }
-    
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
-       {
-        // our "pseudo-constructor"
-	   in.defaultReadObject();
-         // now we are a "live" object again, so let's run rebuild and start
-     //  startAnimation();
-    
-       }
-    
-    //    private void setGM(GameModel gameM){
-    	//   	gm = gameM;
-    	//return gameM;
-    //   }
+
     
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
