@@ -20,6 +20,7 @@ public class GameModel implements java.io.Serializable {
 	private Dront mDront;
 	private PowerUp mPowerUp;	
 	private List<EnemyWall> listEnemyWall = new ArrayList<EnemyWall>();
+	private Background mBg;
 	
 	private boolean lost = false;
 	private float incSpeedTimer = 5; //each 10 sec increase the globalGameSpeed
@@ -41,6 +42,8 @@ public class GameModel implements java.io.Serializable {
 
 		mDront = new Dront();
 		mPowerUp = new PowerUp();
+		
+		mBg = new Background();
 		
 		Random generator = new Random();
 		for(int i = 0; i < 6; i++){
@@ -71,6 +74,7 @@ public class GameModel implements java.io.Serializable {
 			groundBot.setXPos(timeDelta);
 			mDront.updateDront(timeDelta);
 			mPowerUp.updatePowerUp(timeDelta);
+			mBg.setXPos(timeDelta);
 
 			int count = listEnemyWall.size();
 			
@@ -82,6 +86,7 @@ public class GameModel implements java.io.Serializable {
 					}
 					else if (mPowerUp.getType() == 1)  {
 						globalGameSpeed *= 0.5;
+						mDront.setAnimationWalk(1.5f);
 						//Update speed for all 
 						//Update speed for walls
 						for(int i = 0; i < count; i++){
@@ -106,6 +111,7 @@ public class GameModel implements java.io.Serializable {
 			incSpeedTimer -= timeDelta;
 			if(incSpeedTimer < 0){
 				globalGameSpeed *= 1.1;
+				mDront.setAnimationWalk(0.9f);
 				//Update speed for all 
 				//Update speed for walls
 				for(int i = 0; i < count; i++){
@@ -145,6 +151,10 @@ public class GameModel implements java.io.Serializable {
 		}
 
 
+	}
+	
+	public Background getBackgroun(){
+		return mBg;
 	}
 	
 	public int getDistance(){

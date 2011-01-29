@@ -77,14 +77,25 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.ground, BitmapFactory.decodeResource(getResources(), R.drawable.ground));
 		mBitMapCache.put(R.drawable.wall, BitmapFactory.decodeResource(getResources(), R.drawable.wall));
 		mBitMapCache.put(R.drawable.gameover, BitmapFactory.decodeResource(getResources(), R.drawable.gameover));
+		mBitMapCache.put(R.drawable.d1, BitmapFactory.decodeResource(getResources(), R.drawable.d1));
+		mBitMapCache.put(R.drawable.d2, BitmapFactory.decodeResource(getResources(), R.drawable.d2));
+		mBitMapCache.put(R.drawable.d3, BitmapFactory.decodeResource(getResources(), R.drawable.d3));
+		mBitMapCache.put(R.drawable.d4, BitmapFactory.decodeResource(getResources(), R.drawable.d4));
+		mBitMapCache.put(R.drawable.d5, BitmapFactory.decodeResource(getResources(), R.drawable.d5));
+		mBitMapCache.put(R.drawable.d6, BitmapFactory.decodeResource(getResources(), R.drawable.d6));
+		mBitMapCache.put(R.drawable.d7, BitmapFactory.decodeResource(getResources(), R.drawable.d7));
+		mBitMapCache.put(R.drawable.d8, BitmapFactory.decodeResource(getResources(), R.drawable.d8));
+		mBitMapCache.put(R.drawable.d9, BitmapFactory.decodeResource(getResources(), R.drawable.d9));
+		mBitMapCache.put(R.drawable.bg, BitmapFactory.decodeResource(getResources(), R.drawable.bg));
+		
 
 	}
 	
 
 	public void onDraw(Canvas canvas) {
 		// Draw background		
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.gamebg),0,0,null);
-		
+		canvas.drawBitmap(mBitMapCache.get(mGameModel.getBackgroun().getImage()), mGameModel.getBackgroun().getX(),0,null);
+		canvas.drawBitmap(mBitMapCache.get(mGameModel.getBackgroun().getImage()), mGameModel.getBackgroun().getX2(),0,null);
 		
 		// Draw top ground
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundTop().getX1(), mGameModel.getGroundTop().getY(),null);
@@ -103,7 +114,8 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		for(int i = 0; i < count; i++){
 			canvas.drawBitmap(mBitMapCache.get(R.drawable.wall), mGameModel.getListEnemyWall().get(i).getX1(), mGameModel.getListEnemyWall().get(i).getY(),null);
 		}
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
+		
+		canvas.drawBitmap(mBitMapCache.get(mGameModel.getDront().getDrontImage()),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
 	
 		//PowerUp
 		if (mGameModel.getPowerUp().getType() == 0)
