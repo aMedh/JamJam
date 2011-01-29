@@ -8,6 +8,7 @@ public class EnemyWall {
 	private int yPos;
 	private int speed;
 	private float startTime;
+	private boolean doWall = false;
 	
 	Random generator = new Random();
 	
@@ -40,19 +41,33 @@ public class EnemyWall {
 		return yPos - 80;
 	}
 	
-	public void setXPos(float timeDelta){
+	public boolean updateWall(float timeDelta, boolean spawnWall){
+		boolean spawnedNewWall = false;
+		
 		startTime -= timeDelta;
-		if(startTime < 0){	
+
+		if (!doWall && spawnWall && startTime < 0 ) {
+			doWall = true;
+			spawnedNewWall = true;
+		}
+
+		if(startTime < 0 && doWall){	
 			xPos -= timeDelta * speed;
 			if(xPos < -100){
-				xPos = 600;
 				startTime = (generator.nextInt(15) + 1);
+				setNewRandomTime();				
 			}
 		}
+		return spawnedNewWall;
 	}
 	
 	public void setNewRandomTime(){
-		startTime = (generator.nextInt(15) + 1);
+		xPos = 600;
+		double tmp = 100;
+		double newtmp = tmp / speed;
+		int rand = Double.valueOf(15 * newtmp).intValue();
+		startTime = (generator.nextInt(rand));
+		doWall = false;
 	}
 	
 }
