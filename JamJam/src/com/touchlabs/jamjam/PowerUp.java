@@ -9,13 +9,17 @@ public class PowerUp {
 	private int speed;
 	private float startTime;
 	Random generator = new Random();
+	int type;
 	
 	public PowerUp(){
-		yPos = 200;
 		speed = 100;
 		newPos();
 	}
-	
+
+	public void setSpeed(double newspeed){
+		speed = Double.valueOf(newspeed).intValue();// newspeed;
+	}
+		
 	public int getX(){
 		return xPos;
 	}
@@ -37,14 +41,25 @@ public class PowerUp {
 	private void newPos() {
 		xPos = 600;
 
+		int type2 = generator.nextInt(4);
+		if (type2 == 3)
+			type = 1;
+		else if (type2 == 2)
+			type = 2;
+		else type = 0;
+			
 		int floor = generator.nextInt(3);
 		if(floor == 0)
-			yPos = 100;
+			yPos = 120;
 		else if (floor == 1)
-			yPos = 200;
+			yPos = 220;
 		else 
-			yPos = 300;
+			yPos = 320;
 		startTime = 10 + (generator.nextInt(15) + 1);
+	}
+	
+	public int getType() {
+		return type;		
 	}
 
 }

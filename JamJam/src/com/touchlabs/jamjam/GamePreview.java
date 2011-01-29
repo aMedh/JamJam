@@ -69,6 +69,8 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.gamebg, BitmapFactory.decodeResource(getResources(), R.drawable.gamebg));
 		mBitMapCache.put(R.drawable.dront, BitmapFactory.decodeResource(getResources(), R.drawable.dront));
 		mBitMapCache.put(R.drawable.egg, BitmapFactory.decodeResource(getResources(), R.drawable.egg));
+		mBitMapCache.put(R.drawable.watch, BitmapFactory.decodeResource(getResources(), R.drawable.watch));
+		mBitMapCache.put(R.drawable.stop, BitmapFactory.decodeResource(getResources(), R.drawable.stop));
 		mBitMapCache.put(R.drawable.ground, BitmapFactory.decodeResource(getResources(), R.drawable.ground));
 		mBitMapCache.put(R.drawable.wall, BitmapFactory.decodeResource(getResources(), R.drawable.wall));
 		mBitMapCache.put(R.drawable.gameover, BitmapFactory.decodeResource(getResources(), R.drawable.gameover));
@@ -101,7 +103,12 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.dront),mGameModel.getDront().getX(),mGameModel.getDront().getY(),null);
 	
 		//PowerUp
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.egg),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
+		if (mGameModel.getPowerUp().getType() == 0)
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.egg),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
+		else if (mGameModel.getPowerUp().getType() == 1)
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.watch),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
+		else if (mGameModel.getPowerUp().getType() == 2)
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.stop),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
 		
 		//Lost?
 		if(mGameModel.getLost()){
