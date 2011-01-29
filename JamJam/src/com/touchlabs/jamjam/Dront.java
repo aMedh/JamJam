@@ -50,20 +50,28 @@ public class Dront {
 			gridX++;
 	}
 
-	public void moveDrontUP() 
+	public boolean moveDrontUP() 
 	{
+		boolean ret = false;
 		if (!freeze) {
-			if (gridY > 0) 
+			if (gridY > 0) {
 				gridY--;
+				ret = true;
+			}
 		}
+		return ret;
 	}
 
-	public void moveDrontDOWN() 
+	public boolean moveDrontDOWN() 
 	{
+		boolean ret = false;
 		if (!freeze) {
-			if (gridY < 2) 
+			if (gridY < 2) {
 				gridY++;
+				ret = true;
+			}
 		}
+		return ret;
 	}
 	public void frontFreeze() {
 		freeze = true;

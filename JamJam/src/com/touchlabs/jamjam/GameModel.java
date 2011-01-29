@@ -31,12 +31,13 @@ public class GameModel implements java.io.Serializable {
 
 	private Context context;
 	
+	private SoundManager mSoundManager;
 	/**
 	 * Constructor
 	 */
-	public GameModel() {
+	public GameModel(SoundManager sm) {
 
-		
+		mSoundManager = sm;
 		groundTop = new GroundTop();
 		groundMid = new GroundMid();
 		groundBot = new GroundBot();
@@ -88,6 +89,7 @@ public class GameModel implements java.io.Serializable {
 					if (mPowerUp.getType() == 0){
 						mDront.drontPowerUp();
 						distance += 1;
+						mSoundManager.playSound(2);
 					}
 					else if (mPowerUp.getType() == 1)  {
 						globalGameSpeed *= 0.5;
@@ -100,10 +102,15 @@ public class GameModel implements java.io.Serializable {
 						groundTop.setSpeed(globalGameSpeed);
 						groundMid.setSpeed(globalGameSpeed);
 						groundBot.setSpeed(globalGameSpeed);
-						mPowerUp.setSpeed(globalGameSpeed);						
+						mPowerUp.setSpeed(globalGameSpeed);
+
+						mSoundManager.playSound(4);
+						
 					}
-					else if (mPowerUp.getType() == 2)
+					else if (mPowerUp.getType() == 2) {
 						mDront.frontFreeze();
+						mSoundManager.playSound(3);						
+					}
 					
 					mPowerUp.updatePowerUp(600);
 				}
@@ -208,6 +215,7 @@ public class GameModel implements java.io.Serializable {
 				if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
 					if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
 						mDront.hitDront();
+						mSoundManager.playSound(1);
 						distance -= 1;
 						listEnemyWall.get(i).setNewRandomTime();	
 					}

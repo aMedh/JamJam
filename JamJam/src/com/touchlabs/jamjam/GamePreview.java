@@ -30,17 +30,15 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	private Map<Integer, Bitmap> mBitMapCache = new HashMap<Integer, Bitmap>();
 	private Activity mActivity;
 	private GameModel mGameModel;
-
+	private SoundManager mSoundManager;	
 	public Context context;
-
 	
-	public GamePreview(Context context) {
+	public GamePreview(Context context, SoundManager sm) {
 		super(context);			
 		this.context = context;
-		
-		mGameModel = new GameModel();
+		mSoundManager = sm;			
+		mGameModel = new GameModel(mSoundManager);
 		mGameModel.initialize(context);
-		
 		fillBitmapCache();	
 		mActivity = (Activity) context;		
 		getHolder().addCallback(this);
@@ -157,10 +155,14 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 			case MotionEvent.ACTION_DOWN:
 				if(!mGameModel.getLost()){
 					if (event.getX() > 0 && event.getX() < 520) {
-						if (event.getY() > 0 && event.getY() < 160)
-							mGameModel.getDront().moveDrontDOWN();
-						if (event.getY() > 160)
-							mGameModel.getDront().moveDrontUP();
+						if (event.getY() > 0 && event.getY() < 160) {
+							if (mGameModel.getDront().moveDrontDOWN())
+								mSoundManager.playSound(0);
+						}
+						if (event.getY() > 160) {
+							if (mGameModel.getDront().moveDrontUP())
+								mSoundManager.playSound(0);							
+						}
 					}
 				} else {
 					thread.setRunning(false);

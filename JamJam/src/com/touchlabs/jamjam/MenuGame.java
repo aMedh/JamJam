@@ -35,9 +35,11 @@ public class MenuGame extends Activity {
         
         // Set the screen orientation to Portrait
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        
+
+        SoundManager mSoundManager = new SoundManager(getBaseContext());	
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-         gamePreview = new GamePreview(this); 
+         gamePreview = new GamePreview(this,mSoundManager); 
          setContentView(gamePreview);        
     }
 
