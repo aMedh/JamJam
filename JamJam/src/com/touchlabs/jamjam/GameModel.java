@@ -119,7 +119,7 @@ public class GameModel implements java.io.Serializable {
 			timeTick -= timeDelta;
 			boolean showWall = false;
 			if (timeTick <= 0) {
-				timeTick = 1;
+				timeTick = 1.5;
 				showWall = true;
 			}
 			
