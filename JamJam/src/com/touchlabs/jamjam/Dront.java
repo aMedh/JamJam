@@ -9,6 +9,8 @@ public class Dront {
 	private int speedY = 300;
 	private boolean freeze = false;
 	private double freezeTime = 2;
+	private float mAnimation;
+	private float mAnimationWalk = 1.8f;
 	
 	//Constructor
 	public Dront() {}
@@ -68,6 +70,31 @@ public class Dront {
 		freezeTime = 2;
 	}
 	
+	public void setAnimationWalk(float timer){
+		mAnimationWalk *= timer;
+	}
+	
+	public int getDrontImage(){
+			
+			if (mAnimation >= 8*mAnimationWalk/8) {
+				return R.drawable.d1;
+			} else if (mAnimation >= 7*mAnimationWalk/8) {
+				return R.drawable.d2;
+			} else if (mAnimation >= 6*mAnimationWalk/8) {
+				return R.drawable.d3;
+			} else if (mAnimation >= 5*mAnimationWalk/8) {
+				return R.drawable.d4;
+			} else if (mAnimation >= 4*mAnimationWalk/8) {
+				return R.drawable.d5;
+			} else if (mAnimation >= 3*mAnimationWalk/8) {
+				return R.drawable.d6;
+			} else if (mAnimation >= 2*mAnimationWalk/8) {
+				return R.drawable.d7;
+			} else if (mAnimation >= 1*mAnimationWalk/8) {
+				return R.drawable.d8;
+			} else 
+				return R.drawable.d1;
+	}
 		
 	public void updateDront(float timeDelta) {
 		
@@ -77,7 +104,12 @@ public class Dront {
 			if (freezeTime < 0)
 				freeze = false;
 		}
-	
+		
+		mAnimation -= timeDelta;
+		if(mAnimation < 0){
+			mAnimation += mAnimationWalk;
+		}
+		
 		//Dront moves?
 		if (gridY == 0) {
 			if (yPos < 220) {
