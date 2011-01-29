@@ -11,6 +11,7 @@ public class Dront {
 	private double freezeTime = 2;
 	private float mAnimation;
 	private float mAnimationWalk = 1.8f;
+	private int tempImage = R.drawable.d1;
 	
 	//Constructor
 	public Dront() {}
@@ -75,27 +76,46 @@ public class Dront {
 	}
 	
 	public int getDrontImage(){
-			
-			if (mAnimation >= 8*mAnimationWalk/8) {
-				return R.drawable.d1;
-			} else if (mAnimation >= 7*mAnimationWalk/8) {
-				return R.drawable.d2;
-			} else if (mAnimation >= 6*mAnimationWalk/8) {
-				return R.drawable.d3;
-			} else if (mAnimation >= 5*mAnimationWalk/8) {
-				return R.drawable.d4;
-			} else if (mAnimation >= 4*mAnimationWalk/8) {
-				return R.drawable.d5;
-			} else if (mAnimation >= 3*mAnimationWalk/8) {
-				return R.drawable.d6;
-			} else if (mAnimation >= 2*mAnimationWalk/8) {
-				return R.drawable.d7;
-			} else if (mAnimation >= 1*mAnimationWalk/8) {
-				return R.drawable.d8;
-			} else 
-				return R.drawable.d1;
+				if(!freeze){
+					if (mAnimation >= 8*mAnimationWalk/8) {
+						tempImage = R.drawable.d1;
+						return R.drawable.d1;
+					} else if (mAnimation >= 7*mAnimationWalk/8) {
+						tempImage = R.drawable.d2;
+						return R.drawable.d2;
+					} else if (mAnimation >= 6*mAnimationWalk/8) {
+						tempImage = R.drawable.d3;
+						return R.drawable.d3;
+					} else if (mAnimation >= 5*mAnimationWalk/8) {
+						tempImage = R.drawable.d4;
+						return R.drawable.d4;
+					} else if (mAnimation >= 4*mAnimationWalk/8) {
+						tempImage = R.drawable.d5;
+						return R.drawable.d5;
+					} else if (mAnimation >= 3*mAnimationWalk/8) {
+						tempImage = R.drawable.d6;
+						return R.drawable.d6;
+					} else if (mAnimation >= 2*mAnimationWalk/8) {
+						tempImage = R.drawable.d7;
+						return R.drawable.d7;
+					} else if (mAnimation >= 1*mAnimationWalk/8) {
+						tempImage = R.drawable.d8;
+						return R.drawable.d8;
+					} else 
+						tempImage = R.drawable.d1;
+						return R.drawable.d1;
+				} else {
+					return tempImage;
+				}
 	}
-		
+	
+	public double getFreezeTime(){
+		return freezeTime;
+	}
+	
+	public boolean getFreeze(){
+		return freeze;
+	}
 	public void updateDront(float timeDelta) {
 		
 		

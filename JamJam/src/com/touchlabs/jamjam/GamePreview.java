@@ -87,6 +87,7 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.d8, BitmapFactory.decodeResource(getResources(), R.drawable.d8));
 		mBitMapCache.put(R.drawable.d9, BitmapFactory.decodeResource(getResources(), R.drawable.d9));
 		mBitMapCache.put(R.drawable.bg, BitmapFactory.decodeResource(getResources(), R.drawable.bg));
+		mBitMapCache.put(R.drawable.groundbottom, BitmapFactory.decodeResource(getResources(), R.drawable.groundbottom));
 		
 
 	}
@@ -106,8 +107,8 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundMid().getX2(), mGameModel.getGroundMid().getY(),null);
 		
 		//Draw bottom ground
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundBot().getX1(), mGameModel.getGroundBot().getY(),null);
-		canvas.drawBitmap(mBitMapCache.get(R.drawable.ground), mGameModel.getGroundBot().getX2(), mGameModel.getGroundBot().getY(),null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.groundbottom), mGameModel.getGroundBot().getX1(), mGameModel.getGroundBot().getY(),null);
+		canvas.drawBitmap(mBitMapCache.get(R.drawable.groundbottom), mGameModel.getGroundBot().getX2(), mGameModel.getGroundBot().getY(),null);
 
 		//Draw wall in the middle
 		int count = mGameModel.getListEnemyWall().size();
@@ -125,17 +126,21 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		else if (mGameModel.getPowerUp().getType() == 2)
 			canvas.drawBitmap(mBitMapCache.get(R.drawable.stop),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
 		
-		canvas.drawText("Distance: " + mGameModel.getDistance(), 156,20+2,sPaintTextBlack);
-		canvas.drawText("Distance: " + mGameModel.getDistance(), 155,20,sPaintTextWhite);
-
+		canvas.drawText("Distance: " + mGameModel.getDistance(), 166,20+2,sPaintTextBlack);
+		canvas.drawText("Distance: " + mGameModel.getDistance(), 165,20,sPaintTextWhite);
+		
+		if(mGameModel.getDront().getFreeze()){
+			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 166,160+2,sPaintTextBlack);
+			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 165,160,sPaintTextWhite);
+		}
 		//Lost?
 		if(mGameModel.getLost()){
-			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100-30,60,null);
-			canvas.drawText("Your distance: " + mGameModel.getDistance(), 166-20,165+2,sPaintTextBlack);
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100-20,60,null);
+			canvas.drawText("Your distance: " + mGameModel.getDistance(), 166-10,165+2,sPaintTextBlack);
 			
 		    // Restore preferences
 			SharedPreferences settings = mActivity.getSharedPreferences("Score_file", 0);
-			canvas.drawText("Highscore: " + settings.getInt("distance", 0), 166-20,185+2,sPaintTextBlack);
+			canvas.drawText("Highscore: " + settings.getInt("distance", 0), 166-10,185+2,sPaintTextBlack);
 			
 			if(mGameModel.getDistance() > settings.getInt("distance", 0)){
 			// Save you score
