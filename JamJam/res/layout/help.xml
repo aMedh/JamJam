@@ -19,27 +19,17 @@ android:layout_marginLeft="2px" android:layout_marginTop="2px" android:backgroun
  <TextView android:id="@+id/TEXT_VIEW"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"
- android:textColor="@color/black" android:textSize="16px" android:text="Vladimir du får skriva en hjälp text här för spelet och allt annan som kan vara viktigt! //Ahmed
- dsadasdas
- dsadas
- dsadas
- dsadasdsa
- dasdsadas
- dsasaddsa
- dasadsdsa
- dsasaddsa
- fds
- dddddd
- ffffffff
- gggggggg
- hhhhhhhhhhh
- jjjjjjjjjjj
- kkkkkkkkkk dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas
-  dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas
-   dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas
-    dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas
-     dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas
-      dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas dsadasdas"/>
+ android:textColor="@color/white" android:textSize="20px" android:text="
+ 
+ Are you the one that will change history? 
+ Can you save the last male Dodo bird on the planet and save the entire race from EXTINCTION? 
+ Control the bird by pushing on the top or the bottom of the screen. 
+ This game was developed during 2011 Global Game Jam 
+ which is an event where you develop a game in 48 hours. 
+ Avoid walls and stop signs but don't forget to pick up 
+ dodo eggs and stop watches.
+       
+"/>
  
 </ScrollView>
 

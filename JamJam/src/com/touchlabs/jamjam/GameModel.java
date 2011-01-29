@@ -112,7 +112,10 @@ public class GameModel implements java.io.Serializable {
 						mSoundManager.playSound(2);
 					}
 					else if (mPowerUp.getType() == 1)  {
+						
 						globalGameSpeed *= 0.5;
+						if(globalGameSpeed < 100)
+							globalGameSpeed = 100;
 						mDront.setAnimationWalk(1.8f);
 						//Update speed for all 
 						//Update speed for walls
