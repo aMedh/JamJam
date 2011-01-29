@@ -42,7 +42,9 @@ public final class R {
         public static final int startgame=0x7f020019;
         public static final int startgame_highlighted=0x7f02001a;
         public static final int startgame_pressed=0x7f02001b;
-        public static final int wall=0x7f02001c;
+        public static final int stop=0x7f02001c;
+        public static final int wall=0x7f02001d;
+        public static final int watch=0x7f02001e;
     }
     public static final class id {
         public static final int Credits=0x7f060007;

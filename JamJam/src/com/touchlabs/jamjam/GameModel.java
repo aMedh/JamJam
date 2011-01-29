@@ -71,16 +71,34 @@ public class GameModel implements java.io.Serializable {
 			groundBot.setXPos(timeDelta);
 			mDront.updateDront(timeDelta);
 			mPowerUp.updatePowerUp(timeDelta);
+
+			int count = listEnemyWall.size();
 			
 			if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
 				if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
-					mDront.drontPowerUp();
-					distance += 1;
+					if (mPowerUp.getType() == 0){
+						mDront.drontPowerUp();
+						distance += 1;
+					}
+					else if (mPowerUp.getType() == 1)  {
+						globalGameSpeed *= 0.5;
+						//Update speed for all 
+						//Update speed for walls
+						for(int i = 0; i < count; i++){
+							listEnemyWall.get(i).setSpeed(globalGameSpeed);
+						}
+						groundTop.setSpeed(globalGameSpeed);
+						groundMid.setSpeed(globalGameSpeed);
+						groundBot.setSpeed(globalGameSpeed);
+						mPowerUp.setSpeed(globalGameSpeed);						
+					}
+					else if (mPowerUp.getType() == 2)
+						mDront.frontFreeze();
+					
 					mPowerUp.updatePowerUp(600);
 				}
 			}
 					
-			int count = listEnemyWall.size();
 			for(int i = 0; i < count; i++){
 				listEnemyWall.get(i).setXPos(timeDelta);
 			}
@@ -96,6 +114,7 @@ public class GameModel implements java.io.Serializable {
 				groundTop.setSpeed(globalGameSpeed);
 				groundMid.setSpeed(globalGameSpeed);
 				groundBot.setSpeed(globalGameSpeed);
+				mPowerUp.setSpeed(globalGameSpeed);
 				
 				incSpeedTimer = 5;
 			}

@@ -7,6 +7,8 @@ public class Dront {
 	private int gridY = 0;
 	private int speedX = 600;
 	private int speedY = 300;
+	private boolean freeze = false;
+	private double freezeTime = 2;
 	
 	//Constructor
 	public Dront() {}
@@ -48,18 +50,34 @@ public class Dront {
 
 	public void moveDrontUP() 
 	{
-		if (gridY > 0) 
-			gridY--;
+		if (!freeze) {
+			if (gridY > 0) 
+				gridY--;
+		}
 	}
 
 	public void moveDrontDOWN() 
 	{
-		if (gridY < 2) 
-			gridY++;
+		if (!freeze) {
+			if (gridY < 2) 
+				gridY++;
+		}
 	}
+	public void frontFreeze() {
+		freeze = true;
+		freezeTime = 2;
+	}
+	
 		
 	public void updateDront(float timeDelta) {
 		
+		
+		if (freeze) {
+			freezeTime -=timeDelta;
+			if (freezeTime < 0)
+				freeze = false;
+		}
+	
 		//Dront moves?
 		if (gridY == 0) {
 			if (yPos < 220) {
