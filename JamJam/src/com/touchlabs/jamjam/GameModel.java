@@ -27,6 +27,7 @@ public class GameModel implements java.io.Serializable {
 	private double globalGameSpeed = 100;
 	private int distance = 0;
 	private double distanceMeter = 1;
+	private double timeTick = 0;
 
 	private Context context;
 	
@@ -47,8 +48,12 @@ public class GameModel implements java.io.Serializable {
 		
 		Random generator = new Random();
 		for(int i = 0; i < 6; i++){
-			
-			listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), (generator.nextInt(3) + 1)));
+			if (i == 0 || i == 1)
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 1));
+			if (i == 2 || i == 3)
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 2));
+			if (i == 4 || i == 5)
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 3));
 		}
 	}
 	
@@ -103,10 +108,76 @@ public class GameModel implements java.io.Serializable {
 					mPowerUp.updatePowerUp(600);
 				}
 			}
-					
-			for(int i = 0; i < count; i++){
-				listEnemyWall.get(i).setXPos(timeDelta);
+			
+			timeTick -= timeDelta;
+			boolean showWall = false;
+			if (timeTick <= 0) {
+				timeTick = 1;
+				showWall = true;
 			}
+			
+			int y1 = 0;
+			int y2 = 0;
+			int y3 = 0;
+			
+			for(int i = 0; i < count; i++){
+
+				if (i == 0) {
+					boolean temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+					if (temp)
+						y1 = 1;
+				}
+				if (i == 1) {
+					boolean temp = false;
+					if (y1 == 1)
+						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
+					else {
+						temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+						if (temp)
+							y1 = 1;
+					}
+				}
+				if (i == 2) {
+					boolean temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+					if (temp)
+						y2 = 1;
+				}
+				if (i == 3) {
+					boolean temp = false;
+					if (y2 == 1)
+						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
+					else {
+						temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+						if (temp)
+							y2 = 1;
+					}
+				}
+				if (i == 4) {
+					boolean temp = false;
+					if (y1 == 1 && y2 == 1)
+						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
+					else 
+						temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+					if (temp)
+						y3 = 1;
+				}
+				if (i == 5) {
+					boolean temp = false;
+					if (y3 == 1)
+						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
+					else {
+						if (y1 == 1 && y2 == 1) 
+							temp = listEnemyWall.get(i).updateWall(timeDelta,false);
+						else 
+							temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
+						if (temp)
+							y3 = 1;
+					}
+				} 
+
+			}
+			
+			showWall = false;
 			
 			incSpeedTimer -= timeDelta;
 			if(incSpeedTimer < 0){
@@ -138,7 +209,6 @@ public class GameModel implements java.io.Serializable {
 					if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
 						mDront.hitDront();
 						distance -= 1;
-						listEnemyWall.get(i).setX(600);
 						listEnemyWall.get(i).setNewRandomTime();	
 					}
 				}
