@@ -54,7 +54,6 @@ public class SoundManager {
         this.addSound(1.0f, 500, R.raw.egg); // 2
         this.addSound(1.0f, 500, R.raw.stop); // 3
         this.addSound(1.0f, 500, R.raw.time); // 4
-        this.addSound(1.0f, 500, R.raw.song); // 5                    
 	}
 
 	/**

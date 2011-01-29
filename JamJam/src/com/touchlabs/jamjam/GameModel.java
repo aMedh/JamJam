@@ -30,7 +30,6 @@ public class GameModel implements java.io.Serializable {
 	private double timeTick = 0;
 
 	private Context context;
-	private boolean first = true;
 	private SoundManager mSoundManager;
 	/**
 	 * Constructor
@@ -72,11 +71,6 @@ public class GameModel implements java.io.Serializable {
 	 */
 	public  void updateModel(float timeDelta) {
 
-		if (first) {
-			mSoundManager.playLoopedSound(5);
-			first = false;
-		}
-		
 		if(!lost){
 			groundTop.setXPos(timeDelta);
 			groundMid.setXPos(timeDelta);
