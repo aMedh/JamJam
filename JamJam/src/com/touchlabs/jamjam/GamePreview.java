@@ -26,6 +26,8 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 	public static final long serialVersionUID = 1L;
 	private static final Paint sPaintTextWhite = new Paint();
 	private static final Paint sPaintTextBlack = new Paint();
+	private static final Paint sPaintTextWhite2 = new Paint();
+	private static final Paint sPaintTextBlack2 = new Paint();
 	private GamePreviewThread thread;
 	private Map<Integer, Bitmap> mBitMapCache = new HashMap<Integer, Bitmap>();
 	private Activity mActivity;
@@ -58,6 +60,18 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		Typeface font3 = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
 		sPaintTextBlack.setTypeface(font3);
 		sPaintTextBlack.setAntiAlias(true);
+		
+		sPaintTextWhite2.setTextSize(48);
+		sPaintTextWhite2.setARGB(255, 255, 255, 255);
+		Typeface font4 = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
+		sPaintTextWhite2.setTypeface(font4);
+		sPaintTextWhite2.setAntiAlias(true);
+		
+		sPaintTextBlack2.setTextSize(48);
+		sPaintTextBlack2.setARGB(255, 0, 0, 0);
+		Typeface font5 = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
+		sPaintTextBlack2.setTypeface(font5);
+		sPaintTextBlack2.setAntiAlias(true);
 
 	}
 	
@@ -86,7 +100,11 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		mBitMapCache.put(R.drawable.d9, BitmapFactory.decodeResource(getResources(), R.drawable.d9));
 		mBitMapCache.put(R.drawable.bg, BitmapFactory.decodeResource(getResources(), R.drawable.bg));
 		mBitMapCache.put(R.drawable.groundbottom, BitmapFactory.decodeResource(getResources(), R.drawable.groundbottom));
-		
+		mBitMapCache.put(R.drawable.girl, BitmapFactory.decodeResource(getResources(), R.drawable.girl));
+		mBitMapCache.put(R.drawable.mobb1, BitmapFactory.decodeResource(getResources(), R.drawable.mobb1));
+		mBitMapCache.put(R.drawable.mobb2, BitmapFactory.decodeResource(getResources(), R.drawable.mobb2));
+		mBitMapCache.put(R.drawable.mobb3, BitmapFactory.decodeResource(getResources(), R.drawable.mobb3));
+		mBitMapCache.put(R.drawable.mobb4, BitmapFactory.decodeResource(getResources(), R.drawable.mobb4));
 
 	}
 	
@@ -124,13 +142,23 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		else if (mGameModel.getPowerUp().getType() == 2)
 			canvas.drawBitmap(mBitMapCache.get(R.drawable.stop),mGameModel.getPowerUp().getX(),mGameModel.getPowerUp().getY(),null);
 		
+
+		
+		if(mGameModel.getShowGirl()){
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.girl), 370,40,null);
+		}
+		
 		canvas.drawText("Distance: " + mGameModel.getDistance(), 166,20+2,sPaintTextBlack);
 		canvas.drawText("Distance: " + mGameModel.getDistance(), 165,20,sPaintTextWhite);
 		
 		if(mGameModel.getDront().getFreeze()){
-			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 166,160+2,sPaintTextBlack);
-			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 165,160,sPaintTextWhite);
+			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 220,180+2,sPaintTextBlack2);
+			canvas.drawText("" + Double.valueOf(mGameModel.getDront().getFreezeTime()).intValue(), 220,180,sPaintTextWhite2);
 		}
+		
+		//Draw hands on left side
+		canvas.drawBitmap(mBitMapCache.get(mGameModel.getHandImage()), -10,0,null);
+		
 		//Lost?
 		if(mGameModel.getLost()){
 			canvas.drawBitmap(mBitMapCache.get(R.drawable.gameover),100-20,60,null);

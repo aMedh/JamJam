@@ -47,18 +47,22 @@ public final class R {
         public static final int help_pressed=0x7f02001e;
         public static final int helpbg=0x7f02001f;
         public static final int icon=0x7f020020;
-        public static final int options=0x7f020021;
-        public static final int options_highlighted=0x7f020022;
-        public static final int options_pressed=0x7f020023;
-        public static final int optionsbg=0x7f020024;
-        public static final int start=0x7f020025;
-        public static final int start_pressed=0x7f020026;
-        public static final int startgame=0x7f020027;
-        public static final int startgame_highlighted=0x7f020028;
-        public static final int startgame_pressed=0x7f020029;
-        public static final int stop=0x7f02002a;
-        public static final int wall=0x7f02002b;
-        public static final int watch=0x7f02002c;
+        public static final int mobb1=0x7f020021;
+        public static final int mobb2=0x7f020022;
+        public static final int mobb3=0x7f020023;
+        public static final int mobb4=0x7f020024;
+        public static final int options=0x7f020025;
+        public static final int options_highlighted=0x7f020026;
+        public static final int options_pressed=0x7f020027;
+        public static final int optionsbg=0x7f020028;
+        public static final int start=0x7f020029;
+        public static final int start_pressed=0x7f02002a;
+        public static final int startgame=0x7f02002b;
+        public static final int startgame_highlighted=0x7f02002c;
+        public static final int startgame_pressed=0x7f02002d;
+        public static final int stop=0x7f02002e;
+        public static final int wall=0x7f02002f;
+        public static final int watch=0x7f020030;
     }
     public static final class id {
         public static final int Credits=0x7f070007;

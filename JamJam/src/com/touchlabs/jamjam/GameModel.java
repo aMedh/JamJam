@@ -28,6 +28,12 @@ public class GameModel implements java.io.Serializable {
 	private int distance = 0;
 	private double distanceMeter = 1;
 	private double timeTick = 0;
+	
+	private boolean showGirl = false;
+	private float girlTimer = 3f;
+	
+	private float mAnimationHand = 0.8f;
+	private float mAnimation;
 
 	private Context context;
 	
@@ -82,8 +88,25 @@ public class GameModel implements java.io.Serializable {
 			mPowerUp.updatePowerUp(timeDelta);
 			mBg.setXPos(timeDelta);
 
-			int count = listEnemyWall.size();
+			mAnimation -= timeDelta;
+			if(mAnimation < 0){
+				mAnimation += mAnimationHand;
+			}
 			
+			if(distance % 50 == 0)
+				showGirl = true;
+			
+			if(showGirl){
+				girlTimer -= timeDelta;
+				if(girlTimer < 0){
+					showGirl = false;
+					girlTimer = 3f;
+				}
+					
+			}
+			
+			int count = listEnemyWall.size();
+
 			if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
 				if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
 					if (mPowerUp.getType() == 0){
@@ -93,7 +116,7 @@ public class GameModel implements java.io.Serializable {
 					}
 					else if (mPowerUp.getType() == 1)  {
 						globalGameSpeed *= 0.5;
-						mDront.setAnimationWalk(1.5f);
+						mDront.setAnimationWalk(1.8f);
 						//Update speed for all 
 						//Update speed for walls
 						for(int i = 0; i < count; i++){
@@ -229,6 +252,37 @@ public class GameModel implements java.io.Serializable {
 		}
 
 
+	}
+	
+	public void setAnimationHand(float timer){
+		mAnimationHand *= timer;
+	}
+	
+	public int getHandImage(){
+				if (mAnimation >= 4*mAnimationHand/4) {
+					return R.drawable.mobb1;
+				} else if (mAnimation >= 3*mAnimationHand/4) {
+					return R.drawable.mobb2;
+				} else if (mAnimation >= 2*mAnimationHand/4) {
+					return R.drawable.mobb3;
+				} else if (mAnimation >= 1*mAnimationHand/4) {
+					return R.drawable.mobb4;
+
+				} else 
+					return R.drawable.mobb1;
+
+	}
+	
+	public boolean getShowGirl(){
+		return showGirl;
+	}
+	
+	public void setShowGirl(boolean b){
+		showGirl = b;
+	}
+	
+	public float getGirlTimer(){
+		return girlTimer;
 	}
 	
 	public Background getBackgroun(){
