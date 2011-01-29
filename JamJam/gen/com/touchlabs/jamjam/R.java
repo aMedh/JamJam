@@ -86,8 +86,9 @@ public final class R {
         public static final int crash=0x7f040000;
         public static final int egg=0x7f040001;
         public static final int jump=0x7f040002;
-        public static final int stop=0x7f040003;
-        public static final int time=0x7f040004;
+        public static final int song=0x7f040003;
+        public static final int stop=0x7f040004;
+        public static final int time=0x7f040005;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

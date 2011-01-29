@@ -42,7 +42,7 @@ public class GameModel implements java.io.Serializable {
 		groundMid = new GroundMid();
 		groundBot = new GroundBot();
 
-		mDront = new Dront();
+		mDront = new Dront(mSoundManager);
 		mPowerUp = new PowerUp();
 		
 		mBg = new Background();
