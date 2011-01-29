@@ -55,7 +55,7 @@ public class PowerUp {
 			yPos = 220;
 		else 
 			yPos = 320;
-		startTime = 10 + (generator.nextInt(15) + 1);
+		startTime = 5 + (generator.nextInt(20) + 1);
 	}
 	
 	public int getType() {
