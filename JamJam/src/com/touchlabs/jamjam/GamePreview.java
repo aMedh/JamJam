@@ -145,7 +145,7 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 
 		
 		if(mGameModel.getShowGirl()){
-			canvas.drawBitmap(mBitMapCache.get(R.drawable.girl), 370,40,null);
+			canvas.drawBitmap(mBitMapCache.get(R.drawable.girl), 330,40,null);
 		}
 		
 		canvas.drawText("Distance: " + mGameModel.getDistance(), 166,20+2,sPaintTextBlack);
@@ -190,7 +190,7 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 					if (event.getX() > 0 && event.getX() < 520) {
 						if (event.getY() > 0 && event.getY() < 160) {
 							if (mGameModel.getDront().moveDrontDOWN())
-								mSoundManager.playSound(0);
+								mSoundManager.playSound(0);									
 						}
 						if (event.getY() > 160) {
 							if (mGameModel.getDront().moveDrontUP())

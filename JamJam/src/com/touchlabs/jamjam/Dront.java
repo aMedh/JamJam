@@ -11,10 +11,13 @@ public class Dront {
 	private double freezeTime = 2;
 	private float mAnimation;
 	private float mAnimationWalk = 1.8f;
+	private SoundManager mSoundManager;
 	private int tempImage = R.drawable.d1;
 	
 	//Constructor
-	public Dront() {}
+	public Dront(SoundManager ms) {
+		mSoundManager = ms;
+	}
 	
 	//Return actual pos X
 	public int getX() {
@@ -129,6 +132,10 @@ public class Dront {
 		
 		if (freeze) {
 			freezeTime -=timeDelta;
+			if (freezeTime <= 1 && freezeTime+timeDelta >= 1)
+				mSoundManager.playSound(3);
+			if (freezeTime <= 0 && freezeTime+timeDelta >= 0)
+				mSoundManager.playSound(3);
 			if (freezeTime < 0)
 				freeze = false;
 		}
