@@ -21,6 +21,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.SystemClock;
+import android.util.Log;
 
 
 public class SoundManager {
@@ -53,10 +54,7 @@ public class SoundManager {
         this.addSound(1.0f, 500, R.raw.egg); // 2
         this.addSound(1.0f, 500, R.raw.stop); // 3
         this.addSound(1.0f, 500, R.raw.time); // 4
-        this.addSound(1.0f, 500, R.raw.song); // 5
-		
-        playSound(5);
-                    
+        this.addSound(1.0f, 500, R.raw.song); // 5                    
 	}
 
 	/**
@@ -120,8 +118,10 @@ public class SoundManager {
 	 * @return			void
 	 */
 	public void playLoopedSound(int index) {
-	     int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
-	     mSoundPool.play(mSoundArray[index], streamVolume, streamVolume, 1, -1, 1f); 
+		 int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
+		if (mSoundPool.play(mSoundArray[index], streamVolume, streamVolume, -1,0, mSoundPitch[index]) == 0) {
+			//Log.d("SOUNDMANAGER", "Failed to play " + index);
+		}
 	}
 
 	/**
